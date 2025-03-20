@@ -1,13 +1,20 @@
-// lib/expect/core.ts
 export class Expect<T> {
     protected actual: T;
+    protected inverted: boolean;
 
-    constructor(actual: T) {
+    constructor(actual: T, inverted: boolean = false) {
         this.actual = actual;
+        this.inverted = inverted;
+    }
+
+    // Cambiar not() para modificar la instancia existente en lugar de crear una nueva
+    not(): Expect<T> & Matcher<T> {
+        this.inverted = !this.inverted;
+        return this as unknown as Expect<T> & Matcher<T>;
     }
 
     protected assert(condition: boolean, message: string): void {
-        if (!condition) {
+        if (this.inverted ? condition : !condition) {
             throw new Error(message);
         }
     }
@@ -22,7 +29,6 @@ export class Expect<T> {
         return value.toString();
     }
 
-    // Método para obtener una versión segura de this.actual según el tipo esperado
     protected getSafeActual(type: 'array' | 'string' | 'number' | 'any'): any {
         if (this.actual === null || this.actual === undefined) {
             if (type === 'array') {
@@ -34,7 +40,7 @@ export class Expect<T> {
             if (type === 'number') {
                 return NaN;
             }
-            return this.actual; // null o undefined para "any"
+            return this.actual;
         }
         if (type === 'array') {
             if (this.actual && (this.actual as any).constructor === Array) {
@@ -57,7 +63,7 @@ export class Expect<T> {
             }
             return NaN;
         }
-        return this.actual; // Siempre retorna algo
+        return this.actual;
     }
 }
 

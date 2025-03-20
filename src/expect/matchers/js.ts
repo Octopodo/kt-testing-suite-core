@@ -3,48 +3,42 @@ import { Matcher } from '../core';
 
 export const jsMatchers: Matcher<any> = {
     toThrow: function () {
-        var isFunction = false;
-        if (typeof this.actual === 'function') {
-            isFunction = true;
-        }
-        var threw = false;
+        const isFunction = typeof this.actual === 'function';
+        let threw = false;
         if (isFunction) {
             try {
-                (this.actual as () => void)(); // Ejecutar la función, forzando tipo para evitar TS errors
+                (this.actual as () => void)();
             } catch (e) {
                 threw = true;
             }
         }
-        this.assert(
-            threw,
-            'Expected ' +
-                this.toSafeString(this.actual) +
-                ' to throw an error, but it did not'
-        );
-        return this;
-    },
-    toNotThrow: function () {
-        var isFunction = false;
-        if (typeof this.actual === 'function') {
-            isFunction = true;
+
+        const baseMessage = 'Expected ' + this.toSafeString(this.actual);
+        let actionMessage;
+        if (this.inverted) {
+            actionMessage = ' not to throw an error';
+        } else {
+            actionMessage = ' to throw an error';
         }
-        var threw = false;
-        var errorMessage = '';
+        let resultMessage;
         if (isFunction) {
-            try {
-                (this.actual as () => void)();
-            } catch (e: any) {
-                threw = true;
-                errorMessage = e.toString();
+            if (threw) {
+                resultMessage = ', but it did';
+            } else {
+                resultMessage = ', but it did not';
             }
+        } else {
+            resultMessage = ', but it was not a function';
         }
-        this.assert(
-            isFunction && !threw,
-            'Expected ' +
-                this.toSafeString(this.actual) +
-                ' not to throw an error, but it threw: ' +
-                errorMessage
-        );
+        const fullMessage = baseMessage + actionMessage + resultMessage;
+
+        let condition;
+        if (this.inverted) {
+            condition = !(isFunction && !threw);
+        } else {
+            condition = isFunction && threw;
+        }
+        this.assert(condition, fullMessage);
         return this;
     },
     toBe: function (expected: any) {

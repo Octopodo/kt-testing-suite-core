@@ -287,10 +287,14 @@ describe('JS Matchers Suite', () => {
         it('passes when function does not throw', () => {
             expect(() => {
                 return 42;
-            }).toNotThrow();
+            })
+                .not()
+                .toThrow();
             expect(() => {
                 /* Empty function */
-            }).toNotThrow();
+            })
+                .not()
+                .toThrow();
         });
 
         // Sad Path: Function throws an error
@@ -298,22 +302,50 @@ describe('JS Matchers Suite', () => {
             expect(() => {
                 expect(() => {
                     throw new Error('Test error');
-                }).toNotThrow();
+                })
+                    .not()
+                    .toThrow();
             }).toThrow();
         });
 
         // Grey Path: Non-function inputs
         it('fails with non-function values', () => {
-            expect(() => expect(42).toNotThrow()).toThrow();
-            expect(() => expect(null).toNotThrow()).toThrow();
-            expect(() => expect(undefined).toNotThrow()).toThrow();
+            expect(() => expect(42).not().toThrow()).toThrow();
+            expect(() => expect(null).not().toThrow()).toThrow();
+            expect(() => expect(undefined).not().toThrow()).toThrow();
         });
 
         it('Should combine with other Matchers', () => {
             expect(() => {
                 expect(5).toBeNumber();
                 expect('hello').toBeString();
-            }).toNotThrow();
+            })
+                .not()
+                .toThrow();
+        });
+    });
+    describe('Not Namespace Suite', () => {
+        // Happy Path: not inverts passing matchers to failing
+        it('not.toBeNumber fails for numbers', () => {
+            expect(() => expect(42).not().toBeNumber()).toThrow();
+            expect(() => expect(-5.5).not().toBeNumber()).toThrow();
+        });
+
+        // Sad Path: not inverts failing matchers to passing
+        it('not.toBeNumber passes for non-numbers', () => {
+            expect('hello').not().toBeNumber();
+            expect(null).not().toBeNumber();
+        });
+
+        // Grey Path: Test with other matchers
+        it('not.toBe passes for non-matching values', () => {
+            expect(5).not().toBe(10);
+            expect('test').not().toBe('other');
+        });
+
+        it('not.toBeInstanceOf works with types', () => {
+            expect('hello').not().toBeInstanceOf(Number);
+            expect(undefined).not().toBeInstanceOf(Object);
         });
     });
 });
