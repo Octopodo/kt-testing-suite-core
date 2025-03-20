@@ -12,7 +12,11 @@ const customPonyfills = [
         replace: '__objectCreate',
         inject: `function __objectCreate(proto) { function F() {}; F.prototype = proto; return new F(); };`
     },
-    // Opcional: Polyfill para Object.defineProperty si es necesario
+    {
+        find: 'Object.assign',
+        replace: '__objectAssign',
+        inject: `function __objectAssign(target, ...sources) { for (const source of sources) { for (const key in source) { target[key] = source[key]; } } return target; };`
+    },
     {
         find: 'Object.defineProperty',
         replace: '__defineProperty',
