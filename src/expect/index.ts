@@ -13,4 +13,4 @@ export namespace AE {
     }
 }
 
-export { describe, it, getSuites };
+export { describe, it, getSuites, Matcher, Expect, createExpect };
