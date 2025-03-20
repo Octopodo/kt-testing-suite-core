@@ -1,0 +1,7 @@
+./dist
+./dist.test
+./vite.config.ts
+./vite.es.config.ts
+./tsconfig.json.backup
+./tsconfig.tests.json.backup
+.vscode
