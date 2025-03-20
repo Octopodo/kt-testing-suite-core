@@ -282,6 +282,40 @@ describe('JS Matchers Suite', () => {
             comp.remove();
         });
     });
+    describe('toNotThrow Suite', () => {
+        // Happy Path: Function does not throw
+        it('passes when function does not throw', () => {
+            expect(() => {
+                return 42;
+            }).toNotThrow();
+            expect(() => {
+                /* Empty function */
+            }).toNotThrow();
+        });
+
+        // Sad Path: Function throws an error
+        it('fails when function throws', () => {
+            expect(() => {
+                expect(() => {
+                    throw new Error('Test error');
+                }).toNotThrow();
+            }).toThrow();
+        });
+
+        // Grey Path: Non-function inputs
+        it('fails with non-function values', () => {
+            expect(() => expect(42).toNotThrow()).toThrow();
+            expect(() => expect(null).toNotThrow()).toThrow();
+            expect(() => expect(undefined).toNotThrow()).toThrow();
+        });
+
+        it('Should combine with other Matchers', () => {
+            expect(() => {
+                expect(5).toBeNumber();
+                expect('hello').toBeString();
+            }).toNotThrow();
+        });
+    });
 });
 
 runTests(getSuites());

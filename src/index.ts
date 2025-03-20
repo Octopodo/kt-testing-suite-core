@@ -3,7 +3,7 @@ export {
     it,
     expect,
     getSuites,
-    Matcher,
+    type Matcher,
     Expect,
     createExpect
 } from './expect';

@@ -23,6 +23,30 @@ export const jsMatchers: Matcher<any> = {
         );
         return this;
     },
+    toNotThrow: function () {
+        var isFunction = false;
+        if (typeof this.actual === 'function') {
+            isFunction = true;
+        }
+        var threw = false;
+        var errorMessage = '';
+        if (isFunction) {
+            try {
+                (this.actual as () => void)();
+            } catch (e: any) {
+                threw = true;
+                errorMessage = e.toString();
+            }
+        }
+        this.assert(
+            isFunction && !threw,
+            'Expected ' +
+                this.toSafeString(this.actual) +
+                ' not to throw an error, but it threw: ' +
+                errorMessage
+        );
+        return this;
+    },
     toBe: function (expected: any) {
         var safeActual: any = this.getSafeActual('any');
         this.assert(
