@@ -1,3 +1,5 @@
+import { jsMatchers } from './matchers/js';
+
 export class Expect<T> {
     protected actual: T;
     protected inverted: boolean;
@@ -76,9 +78,10 @@ export function createExpect<T>(
     matchers: Matcher<T>[] = []
 ): Expect<T> & Matcher<T> {
     const expectInstance = new Expect(actual) as Expect<T> & Matcher<T>;
-
-    for (var i = 0; i < matchers.length; i++) {
-        var matcherGroup = matchers[i];
+    const fullMatchers =
+        matchers.length === 0 ? [jsMatchers] : [jsMatchers].concat(matchers);
+    for (var i = 0; i < fullMatchers.length; i++) {
+        var matcherGroup = fullMatchers[i];
         for (var key in matcherGroup) {
             if (matcherGroup.hasOwnProperty(key)) {
                 expectInstance[key] = matcherGroup[key];
