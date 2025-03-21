@@ -68,7 +68,7 @@ export class Expect<T> {
 }
 
 export interface Matcher<T> {
-    [key: string]: (expected?: any, ...args: any[]) => void;
+    [key: string]: (expected?: any, ...args: any[]) => Matcher<T>;
 }
 
 export function createExpect<T>(
