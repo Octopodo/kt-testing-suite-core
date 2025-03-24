@@ -51,15 +51,17 @@ import './my-tests.test.ts';
 runTests();
 ```
 
-## Running Tests
+## Build Tests
 
-To execute tests, just go to the debug panel on vscode and select one option:
+To transpile tests to Extendscript run:
 
-#### - Build and Run Tests
+```bash
+npm run build-tests
+```
 
-#### - Run tests
+## Execute Testes
 
-Then you can run the Vscode debuger or press `F5`.
+To execute tests, use the [ExtendScript Debugger](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug), making sure you point to `src/tests/index.test.ts` file.
 
 Output:
 
