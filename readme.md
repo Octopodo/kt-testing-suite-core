@@ -59,7 +59,7 @@ To transpile tests to Extendscript run:
 npm run build-tests
 ```
 
-## Execute Testes
+## Execute Tests
 
 To execute tests, use the [ExtendScript Debugger](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug), making sure you point to `src/tests/index.test.ts` file.
 
