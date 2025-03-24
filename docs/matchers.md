@@ -424,6 +424,14 @@ expect(() => {
 }).toThrow();
 ```
 
+You can use it with other matchers;
+
+```typescript
+expect(() => {
+    expect(5).toBeString();
+}).toThrow();
+```
+
 ### `not().toThrow`
 
 Asserts that the actual function does not throw an error.
