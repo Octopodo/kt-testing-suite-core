@@ -6,7 +6,7 @@ Welcome to the KT Testing Suite! This suite provides a comprehensive set of tool
 
 The suite is designed with [Vitest](https://vitest.dev/) in mind, ensuring they function correctly and efficiently. It includes a variety of matchers and extensibility features to cover a wide range of testing scenarios.
 
-Also, KT Testing suit is integrated with KT Create Plugin, so you can develop Adobe scripts in ExtendScript in TypeScript.
+Also, KT Testing Suite is integrated with [KT Create Plugin](https://github.com/Octopodo/kt-plugin-template), so you can develop Adobe scripts in ExtendScript with TypeScript.
 
 All this enviroment is based on [Bolt CEP](https://github.com/hyperbrew/bolt-cep) building code, so you can use it with Bolt itself.
 
@@ -17,14 +17,6 @@ To install the KT Testing Suite, use the following command:
 ```bash
 npm install kt-testing-suite-core
 ```
-
-## Running Tests
-
-To execute tests, just go to the debug panel on vscode and select one option and pres F5:
-
-#### - Build and Run Tests
-
-#### - Run tests
 
 ## Writing Tests
 
@@ -58,6 +50,16 @@ import './my-tests.test.ts';
 
 runTests();
 ```
+
+## Running Tests
+
+To execute tests, just go to the debug panel on vscode and select one option:
+
+#### - Build and Run Tests
+
+#### - Run tests
+
+Then you can run the Vscode debuger or press `F5`.
 
 Output:
 
