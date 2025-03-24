@@ -38,9 +38,8 @@ You can also leverage the existing matchers within your custom matchers by using
 ```typescript
 const advancedMatchers: Matcher<any> = {
     toBeEvenAndPositive: function () {
-        const safeActual = this.getSafeActual('number');
-        expect(safeActual).toBeEven();
-        expect(safeActua > 0).toBeTrue();
+        expect(this.actual).toBeEven();
+        expect(this.actual).toBeTrue();
         return this;
     }
 };
