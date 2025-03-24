@@ -20,7 +20,7 @@ npm install kt-testing-suite-core
 
 ## Writing Tests
 
-Your tests must be placed inside the `src/tests` folder. You can separate the tests into different files, but they must be imported in an `index.test.ts` file to be executed.
+You can place your tests werever you want. You can separate the tests into different files, but they must be imported in a main test file to be executed, I.E. `index.test.ts`.
 
 Here are some examples of how to write tests using the KT Testing Suite:
 
@@ -59,7 +59,7 @@ To transpile tests to Extendscript run:
 npm run build-tests
 ```
 
-## Execute Tests
+## Run Tests
 
 To execute tests, use the [ExtendScript Debugger](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug), making sure you point to `src/tests/index.test.ts` file.
 
