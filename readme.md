@@ -43,7 +43,7 @@ describe('Example Test Suite', () => {
 
     it('should match the snapshot', () => {
         const result = { key: 'value' };
-        expect(result).toMatchSnapshot();
+        expect(result).toBeEqual({ key: 'value' });
     });
 });
 ```
@@ -57,6 +57,20 @@ import { runTests } from 'kt-testing-suite-core';
 import './my-tests.test.ts';
 
 runTests();
+```
+
+Output:
+
+```
+Suite: Example Test Suite
+  Test: should pass this test
+    ✅ Passed
+  Test: should match the snapshot
+    ✅ Passed
+
+Test Results:
+Passed: 2
+Failed: 0
 ```
 
 ## Documentation
