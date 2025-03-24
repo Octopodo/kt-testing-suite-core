@@ -40,7 +40,7 @@ describe('Example Test Suite', () => {
 });
 ```
 
-Then, you can import it on your `index.test.ts` and call `runTests():
+Then, you can import it on your `index.test.ts` and call `runTests()`:
 
 ```javascript
 // src/tests/index.test.ts
