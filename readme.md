@@ -61,7 +61,7 @@ npm run build-tests
 
 ## Run Tests
 
-To execute tests, use the [ExtendScript Debugger](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug), making sure you point to `src/tests/index.test.ts` file.
+To execute tests, use the [ExtendScript Debugger](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug), making sure you point to your tests entry file, in the previous expample is `src/tests/index.test.ts`.
 
 Output:
 
