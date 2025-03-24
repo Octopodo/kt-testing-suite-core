@@ -87,7 +87,7 @@ For more detailed documentation, please refer to the specific README files in th
 
 You can find the test files in the `src/tests` directory:
 
--   [Example Test](src/tests/example.test.js)
+-   [Example Tests](src/tests/baseMatchers.test.ts)
 
 For more examples and detailed usage, please refer to the test files in the repository.
 
