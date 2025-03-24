@@ -1,6 +1,8 @@
 # Matchers Documentation
 
-## Índice
+Here you can find a reference to all existing matchers
+
+## Index
 
 -   [Equality and Identity](#equality-and-identity)
     -   [`toBe`](#tobe)
