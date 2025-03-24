@@ -51,6 +51,26 @@ export const jsMatchers: Matcher<any> = {
         return this;
     },
 
+    toBeTrue: function () {
+        var safeActual: any = this.getSafeActual('any');
+        this.assert(
+            safeActual === true,
+            'Expected value to be true, but got ' +
+                this.toSafeString(this.actual)
+        );
+        return this;
+    },
+
+    toBeFalse: function () {
+        var safeActual: any = this.getSafeActual('any');
+        this.assert(
+            safeActual === false,
+            'Expected value to be false, but got ' +
+                this.toSafeString(this.actual)
+        );
+        return this;
+    },
+
     toBeTruthy: function () {
         var safeActual: any = this.getSafeActual('any');
         var isTruthy = !!safeActual;
