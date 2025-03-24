@@ -318,6 +318,21 @@ export const jsMatchers: Matcher<any> = {
         return this;
     },
 
+    toHaveProperty: function (expected: string) {
+        var hasProperty = false;
+        if (this.actual && this.actual.hasOwnProperty(expected)) {
+            hasProperty = true;
+        }
+        this.assert(
+            hasProperty,
+            'Expected ' +
+                this.toSafeString(this.actual) +
+                ' to have property ' +
+                expected
+        );
+        return this;
+    },
+
     toBeInstanceOf: function (expected: Function) {
         // Handle undefined and null explicitly
         if (this.actual === undefined) {

@@ -166,7 +166,10 @@ describe('JS Matchers Suite', () => {
             expect([1, 2, 3]).toInclude(2);
             expect(['a', 'b']).toInclude('a');
         });
-
+        it('toHaveProperty passes with object properties', () => {
+            expect({ a: 1, b: 2 }).toHaveProperty('a');
+            expect({ a: 1, b: 2 }).toHaveProperty('b');
+        });
         // Grey Path: Edge cases of size/content
         it('toBeEmpty passes with null and undefined', () => {
             expect(null).toBeEmpty();
@@ -181,6 +184,9 @@ describe('JS Matchers Suite', () => {
         it('toContain fails with partial matches', () => {
             expect(() => expect('hello').toContain('world')).toThrow();
         });
+        it('toHaveProperty fails with missing properties', () => {
+            expect(() => expect({ a: 1 }).toHaveProperty('b')).toThrow();
+        });
 
         // Sad Path: Invalid or unexpected inputs
         it('toBeEmpty fails with non-empty values', () => {
@@ -194,6 +200,10 @@ describe('JS Matchers Suite', () => {
 
         it('toInclude fails with non-members', () => {
             expect(() => expect([1, 2]).toInclude(3)).toThrow();
+        });
+
+        it('toHaveProperty fails with incorrect properties', () => {
+            expect(() => expect({ a: 1 }).toHaveProperty('b')).toThrow();
         });
     });
 
