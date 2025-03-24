@@ -1,6 +1,6 @@
 # Matchers Documentation
 
-Here you can find a reference to all existing matchers
+Here you can find a reference to all existing matchers.
 
 ## Index
 
