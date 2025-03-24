@@ -5,6 +5,7 @@ export {
     getSuites,
     type Matcher,
     Expect,
-    createExpect
+    createExpect,
+    extendMatchers
 } from './expect';
 export { runTests } from './runner';

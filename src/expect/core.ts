@@ -91,3 +91,5 @@ export function createExpect<T>(
 
     return expectInstance;
 }
+
+export { createExpect as extendMatchers };
