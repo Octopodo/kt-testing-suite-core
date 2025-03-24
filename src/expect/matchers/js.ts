@@ -1,52 +1,13 @@
 // lib/expect/matchers/js.ts
-import { Matcher } from '../core';
+import { Matcher, Expect } from '../core';
 
 export const jsMatchers: Matcher<any> = {
-    toThrow: function () {
-        const isFunction = typeof this.actual === 'function';
-        let threw = false;
-        if (isFunction) {
-            try {
-                (this.actual as () => void)();
-            } catch (e) {
-                threw = true;
-            }
-        }
-
-        const baseMessage = 'Expected ' + this.toSafeString(this.actual);
-        let actionMessage;
-        if (this.inverted) {
-            actionMessage = ' not to throw an error';
-        } else {
-            actionMessage = ' to throw an error';
-        }
-        let resultMessage;
-        if (isFunction) {
-            if (threw) {
-                resultMessage = ', but it did';
-            } else {
-                resultMessage = ', but it did not';
-            }
-        } else {
-            resultMessage = ', but it was not a function';
-        }
-        const fullMessage = baseMessage + actionMessage + resultMessage;
-
-        let condition;
-        if (this.inverted) {
-            condition = !(isFunction && !threw);
-        } else {
-            condition = isFunction && threw;
-        }
-        this.assert(condition, fullMessage);
-        return this;
-    },
     toBe: function (expected: any) {
         var safeActual: any = this.getSafeActual('any');
         this.assert(
             safeActual === expected,
             'Expected ' +
-                expected +
+                this.toSafeString(expected) +
                 ' but got ' +
                 this.toSafeString(this.actual)
         );
@@ -398,5 +359,86 @@ export const jsMatchers: Matcher<any> = {
                 (expected.name || 'unknown type')
         );
         return this;
+    },
+    toThrow: function () {
+        const isFunction = typeof this.actual === 'function';
+        let threw = false;
+        if (isFunction) {
+            try {
+                (this.actual as () => void)();
+            } catch (e) {
+                threw = true;
+            }
+        }
+
+        const baseMessage = 'Expected ' + this.toSafeString(this.actual);
+        let actionMessage;
+        if (this.inverted) {
+            actionMessage = ' not to throw an error';
+        } else {
+            actionMessage = ' to throw an error';
+        }
+        let resultMessage;
+        if (isFunction) {
+            if (threw) {
+                resultMessage = ', but it did';
+            } else {
+                resultMessage = ', but it did not';
+            }
+        } else {
+            resultMessage = ', but it was not a function';
+        }
+        const fullMessage = baseMessage + actionMessage + resultMessage;
+
+        let condition;
+        if (this.inverted) {
+            condition = !(isFunction && !threw);
+        } else {
+            condition = isFunction && threw;
+        }
+        this.assert(condition, fullMessage);
+        return this;
+    },
+    toPassAny: function (conditions: Array<string | Record<string, any>>) {
+        if (conditions.length === 0) {
+            this.assert(false, 'No conditions provided to toPassAny');
+        }
+        const errors: string[] = [];
+        for (const condition of conditions) {
+            let matcherKey: string = '';
+            let expectedValues: any;
+
+            if (typeof condition === 'string') {
+                matcherKey = condition;
+                expectedValues = undefined;
+            } else {
+                // Es un objeto, usar for...in para obtener la clave y el valor
+                for (var key in condition) {
+                    matcherKey = key;
+                    expectedValues = condition[key];
+                    break; // Solo esperamos una propiedad por objeto
+                }
+            }
+
+            // Detectar si termina en 'Not' usando regex
+            const notRegex = /Not$/;
+            const isNot = notRegex.test(matcherKey);
+            const matcher = isNot
+                ? matcherKey.replace(notRegex, '')
+                : matcherKey;
+
+            try {
+                const expectInstance = isNot ? this.not() : this;
+                if (expectedValues === undefined) {
+                    (expectInstance as any)[matcher]();
+                } else {
+                    (expectInstance as any)[matcher](expectedValues);
+                }
+                return this;
+            } catch (e: any) {
+                errors.push(e.message);
+            }
+        }
+        throw new Error(`Failed all conditions:\n  - ${errors.join('\n  - ')}`);
     }
 };
