@@ -8,6 +8,12 @@ Asserts that the actual value is identical to the expected value.
 
 > **Warning:** Two distinct objects with the same properties will not pass this test. Use `toEqual` to compare object properties.
 
+**Arguments:**
+
+| Parameter  | Description                                    |
+| ---------- | ---------------------------------------------- |
+| `expected` | The value to compare against the actual value. |
+
 **Examples:**
 
 ```typescript
@@ -19,6 +25,12 @@ expect('test').toBe('test');
 ### `toEqual`
 
 Asserts that the actual value is deeply equal to the expected value.
+
+**Arguments:**
+
+| Parameter  | Description                                    |
+| ---------- | ---------------------------------------------- |
+| `expected` | The value to compare against the actual value. |
 
 **Examples:**
 
@@ -177,6 +189,12 @@ expect(undefined).toBeEmpty();
 
 Asserts that the actual value has the expected length.
 
+**Arguments:**
+
+| Parameter  | Description          |
+| ---------- | -------------------- |
+| `expected` | The expected length. |
+
 **Examples:**
 
 ```typescript
@@ -190,6 +208,12 @@ expect(undefined).toHaveLength(0);
 
 Asserts that the actual value contains the expected substring.
 
+**Arguments:**
+
+| Parameter  | Description                 |
+| ---------- | --------------------------- |
+| `expected` | The substring to check for. |
+
 **Examples:**
 
 ```typescript
@@ -201,6 +225,12 @@ expect('test').toContain('es');
 
 Asserts that the actual array includes the expected element.
 
+**Arguments:**
+
+| Parameter  | Description               |
+| ---------- | ------------------------- |
+| `expected` | The element to check for. |
+
 **Examples:**
 
 ```typescript
@@ -211,6 +241,12 @@ expect(['a', 'b']).toInclude('a');
 ### `toHaveProperty`
 
 Asserts that the actual object has the expected property.
+
+**Arguments:**
+
+| Parameter  | Description                |
+| ---------- | -------------------------- |
+| `expected` | The property to check for. |
 
 **Examples:**
 
@@ -225,6 +261,12 @@ expect({ a: 1, b: 2 }).toHaveProperty('b');
 
 Asserts that the actual value is greater than the expected value.
 
+**Arguments:**
+
+| Parameter  | Description                   |
+| ---------- | ----------------------------- |
+| `expected` | The value to compare against. |
+
 **Examples:**
 
 ```typescript
@@ -235,6 +277,12 @@ expect(0).toBeGreaterThan(-1);
 ### `toBeLessThan`
 
 Asserts that the actual value is less than the expected value.
+
+**Arguments:**
+
+| Parameter  | Description                   |
+| ---------- | ----------------------------- |
+| `expected` | The value to compare against. |
 
 **Examples:**
 
@@ -247,6 +295,12 @@ expect(-1).toBeLessThan(0);
 
 Asserts that the actual value is greater than or equal to the expected value.
 
+**Arguments:**
+
+| Parameter  | Description                   |
+| ---------- | ----------------------------- |
+| `expected` | The value to compare against. |
+
 **Examples:**
 
 ```typescript
@@ -257,6 +311,12 @@ expect(5).toBeGreaterThanOrEqual(5);
 ### `toBeLessThanOrEqual`
 
 Asserts that the actual value is less than or equal to the expected value.
+
+**Arguments:**
+
+| Parameter  | Description                   |
+| ---------- | ----------------------------- |
+| `expected` | The value to compare against. |
 
 **Examples:**
 
@@ -270,6 +330,12 @@ expect(5).toBeLessThanOrEqual(5);
 ### `toBeInstanceOf`
 
 Asserts that the actual value is an instance of the expected class.
+
+**Arguments:**
+
+| Parameter  | Description                 |
+| ---------- | --------------------------- |
+| `expected` | The class to check against. |
 
 **Examples:**
 
@@ -318,8 +384,46 @@ expect(() => {
 
 Asserts that the actual value passes any of the provided conditions.
 
+**Arguments:**
+
+| Parameter    | Description                                                                           |
+| ------------ | ------------------------------------------------------------------------------------- |
+| `conditions` | An array of conditions to check against. Each condition can be a string or an object. |
+
+**Condition Format:**
+
+| Format | Description                                                                                 |
+| ------ | ------------------------------------------------------------------------------------------- |
+| String | Use the matcher name directly if it does not require an expected value.                     |
+| Object | Use a key-value pair where the key is the matcher name and the value is the expected value. |
+| Not    | Append `Not` to the matcher name to use the `not()` functionality of `expect`.              |
+
 **Examples:**
 
 ```typescript
-expect(5).toPassAny(['toBeNumber', { toBeGreaterThan: 3 }]);
+// Using a single string matcher
+expect(5).toPassAny([
+    'toBeNumber',
+    'toBeStringNot'
+]);
+
+// Using a single object matcher
+expect(5).toPassAny([
+    { toBeNumber: undefined}
+    { toBeGreaterThan: 3 }
+]);
+
+// Using multiple matchers
+expect(5).toPassAny([
+    'toBeString',
+    { toBeGreaterThan: 10 },
+    { toBe: 5 }
+]);
+
+// Using the 'Not' functionality
+expect(5).toPassAny([
+    'toBeStringNot',
+    { toBeLessThan: 3 },
+    { toBe: 5 }
+]);
 ```

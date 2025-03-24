@@ -23,10 +23,10 @@ Represents a suite of tests with a description and an array of tests.
 
 **Properties:**
 
-| Property      | Type            | Description                        |
-| ------------- | --------------- | ---------------------------------- |
-| `description` | string          | The description of the test suite. |
-| `tests`       | [Test[]](#test) | The array of tests in the suite.   |
+| Property      | Type   | Description                        |
+| ------------- | ------ | ---------------------------------- |
+| `description` | string | The description of the test suite. |
+| `tests`       | Test[] | The array of tests in the suite.   |
 
 ### describe
 
@@ -55,10 +55,10 @@ Defines a test within a suite.
 
 **Arguments:**
 
-| Argument | Type              | Description              |
-| -------- | ----------------- | ------------------------ |
-| `name`   | string            | The name of the test.    |
-| `fn`     | [TestFn](#testfn) | The function to execute. |
+| Argument | Type   | Description              |
+| -------- | ------ | ------------------------ |
+| `name`   | string | The name of the test.    |
+| `fn`     | TestFn | The function to execute. |
 
 **Example:**
 
@@ -81,7 +81,7 @@ console.log(suites);
 
 ### expect
 
-Creates an instance of [Expect](#expect) with the provided matchers.
+Creates an instance of `Expect` with the provided matchers.
 
 **Arguments:**
 
@@ -117,7 +117,7 @@ Class for handling test expectations.
 
 ### createExpect
 
-Creates an [Expect](#expect) instance with the provided matchers.
+Creates an `Expect` instance with the provided matchers.
 
 **Arguments:**
 
@@ -146,10 +146,10 @@ Class for running test suites and displaying results.
 
 **Methods:**
 
-| Method                                 | Description                    |
-| -------------------------------------- | ------------------------------ |
-| `run(suites: [Suite[]](#suite)): void` | Runs the provided test suites. |
-| `showResults(): void`                  | Displays the test results.     |
+| Method                       | Description                    |
+| ---------------------------- | ------------------------------ |
+| `run(suites: Suite[]): void` | Runs the provided test suites. |
+| `showResults(): void`        | Displays the test results.     |
 
 **Example:**
 
@@ -164,9 +164,9 @@ Runs all defined test suites.
 
 **Arguments:**
 
-| Argument | Type              | Description                      |
-| -------- | ----------------- | -------------------------------- |
-| `suites` | [Suite[]](#suite) | The array of test suites to run. |
+| Argument | Type    | Description                      |
+| -------- | ------- | -------------------------------- |
+| `suites` | Suite[] | The array of test suites to run. |
 
 **Example:**
 

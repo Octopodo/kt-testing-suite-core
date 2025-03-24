@@ -63,6 +63,7 @@ runTests();
 
 For more detailed documentation, please refer to the specific README files in the `docs` folder:
 
+-   [Core](docs/core.md)
 -   [Matchers](docs/matchers.md)
 -   [Extensibility](docs/extensibility.md)
 
@@ -76,7 +77,8 @@ For more examples and detailed usage, please refer to the test files in the repo
 
 ## Links
 
--   [KT Testing Suite Repository](https://github.com/Octopodo/kt-testing-suite-ts)
+-   [Bolt Cep](https://github.com/hyperbrew/bolt-cep)
+-   [KT Plugin Template](https://github.com/Octopodo/kt-plugin-template)
 
 ```
 
