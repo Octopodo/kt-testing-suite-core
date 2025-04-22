@@ -209,7 +209,3 @@ For more examples and detailed usage, please refer to the test files in the repo
 
 -   [Bolt Cep](https://github.com/hyperbrew/bolt-cep)
 -   [KT Extendscript Builder](https://github.com/Octopodo/kt-extendscript-builder)
-
-```
-
-```
