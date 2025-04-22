@@ -1,6 +1,8 @@
 import {
     describe,
     it,
+    beforeEach,
+    afterEach,
     expect,
     getSuites,
     type Matcher,
@@ -9,9 +11,12 @@ import {
     extendMatchers
 } from './expect';
 import { runTests } from './runner';
+
 export {
     describe,
     it,
+    beforeEach,
+    afterEach,
     expect,
     getSuites,
     type Matcher,
