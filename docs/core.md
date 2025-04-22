@@ -68,6 +68,54 @@ it('should pass', () => {
 });
 ```
 
+### beforeEach
+
+Defines a function to run before each test in the current suite.
+
+**Arguments:**
+
+| Argument | Type       | Description                           |
+| -------- | ---------- | ------------------------------------- |
+| `fn`     | () => void | Function to execute before each test. |
+
+**Example:**
+
+```typescript
+describe('Example Suite', () => {
+    beforeEach(() => {
+        // Setup code here
+    });
+
+    it('should use setup from beforeEach', () => {
+        // Test code here
+    });
+});
+```
+
+### afterEach
+
+Defines a function to run after each test in the current suite.
+
+**Arguments:**
+
+| Argument | Type       | Description                          |
+| -------- | ---------- | ------------------------------------ |
+| `fn`     | () => void | Function to execute after each test. |
+
+**Example:**
+
+```typescript
+describe('Example Suite', () => {
+    afterEach(() => {
+        // Cleanup code here
+    });
+
+    it('will be followed by afterEach', () => {
+        // Test code here
+    });
+});
+```
+
 ### getSuites
 
 Returns all defined test suites.
