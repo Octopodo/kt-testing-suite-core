@@ -1,5 +1,0 @@
-{
-    "test-builder": {
-        "input": "src/TestBuilder.ts"
-    }
-}

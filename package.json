@@ -6,9 +6,10 @@
     "main": "src/index.ts",
     "license": "MIT",
     "scripts": {
-        "build": "kt-build",
+        "build": "kt-build --watch false",
         "watch": "kt-build --watch",
-        "build-tests": "kt-build --test",
+        "build-tests": "kt-build build-tests",
+        "build-tests-debug": "kt-build build-tests-debug",
         "test-builder": "kt-build test-builder"
     },
     "files": [
@@ -17,7 +18,7 @@
     ],
     "dependencies": {
         "kt-core": "*",
-        "kt-extendscript-builder": "^1.4.10"
+        "kt-extendscript-builder": "^1.0.0"
     },
     "devDependencies": {
         "@babel/core": "^7.26.9",

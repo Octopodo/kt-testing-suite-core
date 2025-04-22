@@ -1,4 +1,4 @@
-export {
+import {
     describe,
     it,
     expect,
@@ -8,4 +8,15 @@ export {
     createExpect,
     extendMatchers
 } from './expect';
-export { runTests } from './runner';
+import { runTests } from './runner';
+export {
+    describe,
+    it,
+    expect,
+    getSuites,
+    type Matcher,
+    Expect,
+    createExpect,
+    extendMatchers,
+    runTests
+};
