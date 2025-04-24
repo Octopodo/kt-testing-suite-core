@@ -1,3 +1,5 @@
+//@include "utils/json2.js"
+
 import {
     describe,
     it,
