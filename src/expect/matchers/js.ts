@@ -338,10 +338,13 @@ export const jsMatchers: Matcher<any> = {
         return this;
     },
 
-    toHaveProperty: function (expected: string) {
+    toHaveProperty: function (expected: string, value?: any) {
         var hasProperty = false;
         if (this.actual && this.actual.hasOwnProperty(expected)) {
             hasProperty = true;
+        }
+        if (hasProperty && arguments.length > 1) {
+            hasProperty = this.actual[expected as keyof typeof this.actual] === value;
         }
         this.assert(
             hasProperty,

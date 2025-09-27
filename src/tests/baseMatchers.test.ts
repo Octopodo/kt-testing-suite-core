@@ -170,6 +170,15 @@ describe('JS Matchers Suite', () => {
             expect({ a: 1, b: 2 }).toHaveProperty('a');
             expect({ a: 1, b: 2 }).toHaveProperty('b');
         });
+        it("toHaveProperty passes with object properties and values", () => {
+            expect({ a: 1, b: 2 }).toHaveProperty('a', 1);
+            expect({ a: 1, b: 2 }).toHaveProperty('b', 2);
+        });
+
+        it('toHaveProperty fails with correct property but wrong value', () => {
+            expect(() => expect({ a: 1, b: 2 }).toHaveProperty('a', 2)).toThrow();
+            expect(() => expect({ a: 1, b: 2 }).toHaveProperty('b', 1)).toThrow();
+        });
         // Grey Path: Edge cases of size/content
         it('toBeEmpty passes with null and undefined', () => {
             expect(null).toBeEmpty();
