@@ -1,5 +1,5 @@
 import { Matcher } from '../core';
-import { expect } from '..';
+import { expect } from '../expect-base';
 
 export const IOMatchers: Matcher<any> = {
     toBeFile: function (expected: any) {
