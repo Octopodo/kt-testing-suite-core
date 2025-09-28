@@ -27,6 +27,7 @@ Here are some examples of how to write tests using the KT Testing Suite:
 import { describe, it, expect } from 'kt-testing-suite-core';
 
 describe('Example Test Suite', () => {
+
     it('should pass this test', () => {
         expect(true).toBe(true);
     });
@@ -64,12 +65,19 @@ Passed: 2
 Failed: 0
 ```
 
-## Using `beforeEach` and `afterEach` Hooks
+## Using Hooks
 
-The testing suite supports `beforeEach` and `afterEach` hooks to set up and tear down conditions before and after each test within a `describe` block or the entire file.
+The testing suite supports various hooks to set up and tear down conditions for your tests.
+
+### Test-Level Hooks
 
 -   `beforeEach(fn)`: Runs the provided function `fn` before each test in the current scope.
 -   `afterEach(fn)`: Runs the provided function `fn` after each test in the current scope.
+
+### Suite-Level Hooks
+
+-   `beforeAll(fn)`: Runs the provided function `fn` once before all tests in the current suite.
+-   `afterAll(fn)`: Runs the provided function `fn` once after all tests in the current suite.
 
 These hooks are useful for tasks like resetting state, cleaning up resources, or initializing common variables needed for multiple tests.
 
@@ -121,12 +129,72 @@ Passed: 2
 Failed: 0
 ```
 
+## Using Suite-Level Hooks
+
+Suite-level hooks run once per test suite, making them perfect for expensive setup operations like creating compositions, importing assets, or initializing project resources.
+
+**Example:**
+
+```javascript
+// src/tests/suite-hooks-example.test.ts
+import {
+    describe,
+    it,
+    expect,
+    beforeAll,
+    afterAll
+} from 'kt-testing-suite-core';
+
+describe('Composition Tests', () => {
+    let testComp = null;
+
+    beforeAll(() => {
+        // Expensive setup - runs once before all tests
+        testComp = app.project.items.addComp("Test Composition", 1920, 1080, 1, 10, 30);
+    });
+
+    afterAll(() => {
+        // Cleanup - runs once after all tests
+        if (testComp) {
+            testComp.remove();
+            testComp = null;
+        }
+    });
+
+    it('should have composition available', () => {
+        expect(testComp).not().toBeNull();
+        expect(testComp.name).toBe("Test Composition");
+    });
+
+    it('should persist composition properties between tests', () => {
+        expect(testComp.width).toBe(1920);
+        expect(testComp.height).toBe(1080);
+        expect(testComp.duration).toBe(10);
+    });
+});
+```
+
+Output:
+
+```
+Suite: Composition Tests
+  Test: should have composition available
+    ✅ Passed
+  Test: should persist composition properties between tests
+    ✅ Passed
+
+Test Results:
+Passed: 2
+Failed: 0
+```
+
 ## Nested Hooks
 
 Hooks can be nested within `describe` blocks. When hooks are nested, they follow a specific execution order:
 
+-   **`beforeAll`**: Runs once per suite (no inheritance from parent suites).
+-   **`afterAll`**: Runs once per suite (no inheritance from parent suites).
 -   **`beforeEach`**: Outer hooks run before inner hooks (parent → child).
-
 -   **`afterEach`**: Inner hooks run before outer hooks (child → parent).
 
 This allows for setting up and tearing down context specific to nested suites while inheriting the setup/teardown from parent suites.
@@ -139,36 +207,63 @@ import {
     describe,
     it,
     expect,
+    beforeAll,
+    afterAll,
     beforeEach,
     afterEach
 } from 'kt-testing-suite-core';
 
-describe('Outer Suite', () => {
-    let counter = 0;
+describe('Project Tests', () => {
+    let projectComp = null;
+    let layerCount = 0;
+
+    beforeAll(() => {
+        // Create main composition for all tests
+        projectComp = app.project.items.addComp("Project Test Comp", 1920, 1080, 1, 5, 30);
+    });
+
+    afterAll(() => {
+        // Clean up main composition
+        if (projectComp) {
+            projectComp.remove();
+        }
+    });
 
     beforeEach(() => {
-        counter = 1; // Outer setup
+        layerCount = projectComp.numLayers; // Track layers before each test
     });
 
     afterEach(() => {
-        counter = 0; // Outer cleanup
+        // Remove any layers added during tests
+        while (projectComp.numLayers > layerCount) {
+            projectComp.layer(1).remove();
+        }
     });
 
-    it('should start with counter at 1', () => {
-        expect(counter).toBe(1);
+    it('should have project composition available', () => {
+        expect(projectComp).not().toBeNull();
+        expect(projectComp.name).toBe("Project Test Comp");
     });
 
-    describe('Inner Suite', () => {
-        beforeEach(() => {
-            counter += 10; // Inner setup runs after outer
+    describe('Layer Tests', () => {
+        let textLayer = null;
+
+        beforeAll(() => {
+            // Add a text layer for layer-specific tests
+            textLayer = projectComp.layers.addText("Test Text");
         });
 
-        afterEach(() => {
-            counter -= 10; // Inner cleanup runs before outer
+        afterAll(() => {
+            // Clean up text layer
+            if (textLayer) {
+                textLayer.remove();
+            }
         });
 
-        it('should combine outer and inner hooks', () => {
-            expect(counter).toBe(11); // 1 (outer) + 10 (inner)
+        it('should have both composition and text layer', () => {
+            expect(projectComp).not().toBeNull(); // From outer suite
+            expect(textLayer).not().toBeNull(); // From inner suite
+            expect(projectComp.numLayers).toBe(1); // Text layer was added
         });
     });
 });
@@ -177,11 +272,11 @@ describe('Outer Suite', () => {
 Output:
 
 ```
-Suite: Outer Suite
-  Test: should start with counter at 1
+Suite: Project Tests
+  Test: should have project composition available
     ✅ Passed
-Suite: Inner Suite
-  Test: should combine outer and inner hooks
+Suite: Layer Tests
+  Test: should have both composition and text layer
     ✅ Passed
 
 Test Results:

@@ -116,6 +116,54 @@ describe('Example Suite', () => {
 });
 ```
 
+### beforeAll
+
+Defines a function to run once before all tests in the current suite.
+
+**Arguments:**
+
+| Argument | Type       | Description                                  |
+| -------- | ---------- | -------------------------------------------- |
+| `fn`     | () => void | Function to execute once before all tests. |
+
+**Example:**
+
+```typescript
+describe('Example Suite', () => {
+    beforeAll(() => {
+        // Setup code that runs once
+    });
+
+    it('uses setup from beforeAll', () => {
+        // Test code here
+    });
+});
+```
+
+### afterAll
+
+Defines a function to run once after all tests in the current suite.
+
+**Arguments:**
+
+| Argument | Type       | Description                                 |
+| -------- | ---------- | ------------------------------------------- |
+| `fn`     | () => void | Function to execute once after all tests. |
+
+**Example:**
+
+```typescript
+describe('Example Suite', () => {
+    afterAll(() => {
+        // Cleanup code that runs once
+    });
+
+    it('will be followed by afterAll eventually', () => {
+        // Test code here
+    });
+});
+```
+
 ### getSuites
 
 Returns all defined test suites.
