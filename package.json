@@ -16,7 +16,7 @@
         "src",
         "tsconfig.json"
     ],
-    "dependencies": {
-        "kt-extendscript-builder": "^1.0.0"
+    "devDependencies": {
+        "kt-extendscript-builder": "^1.6.4"
     }
 }
