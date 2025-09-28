@@ -6,4 +6,5 @@ import './not.test';
 import './toPassAny.test';
 import './extend.test';
 import './beforeAfterEach.test';
+import './beforeAfterAll.test';
 runTests();

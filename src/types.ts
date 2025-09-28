@@ -13,6 +13,8 @@ export interface Suite {
     tests: Test[];
     beforeEach?: TestFn;
     afterEach?: TestFn;
+    beforeAll?: TestFn;
+    afterAll?: TestFn;
     parent?: Suite;
     children?: Suite[];
 }

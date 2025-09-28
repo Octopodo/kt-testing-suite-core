@@ -40,6 +40,20 @@ export function afterEach(fn: TestFn): void {
     currentSuite.afterEach = fn;
 }
 
+export function beforeAll(fn: TestFn): void {
+    if (!currentSuite) {
+        throw new Error('beforeAll() must be called inside a describe()');
+    }
+    currentSuite.beforeAll = fn;
+}
+
+export function afterAll(fn: TestFn): void {
+    if (!currentSuite) {
+        throw new Error('afterAll() must be called inside a describe()');
+    }
+    currentSuite.afterAll = fn;
+}
+
 export function getSuites(): Suite[] {
     return suites;
 }
