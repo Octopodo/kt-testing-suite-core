@@ -4,42 +4,43 @@ Here you can find a reference to all existing matchers.
 
 ## Index
 
--   [Equality and Identity](#equality-and-identity)
-    -   [`toBe`](#tobe)
-    -   [`toEqual`](#toequal)
--   [Existence and Type](#existence-and-type)
-    -   [`toBeDefined`](#tobedefined)
-    -   [`toBeUndefined`](#tobeundefined)
-    -   [`toBeNull`](#tobenull)
-    -   [`toBeNumber`](#tobenumber)
-    -   [`toBeNaN`](#tobenan)
-    -   [`toBeString`](#tobestring)
-    -   [`toBeBoolean`](#tobeboolean)
-    -   [`toBeFunction`](#tobefunction)
-    -   [`toBeArray`](#tobearray)
--   [Truthiness](#truthiness)
-    -   [`toBeTrue`](#tobetrue)
-    -   [`toBeFalse`](#tobefalse)
-    -   [`toBeTruthy`](#tobetruthy)
-    -   [`toBeFalsy`](#tobefalsy)
--   [Size and Content](#size-and-content)
-    -   [`toBeEmpty`](#tobeempty)
-    -   [`toHaveLength`](#tohavelength)
-    -   [`toContain`](#tocontain)
-    -   [`toInclude`](#toinclude)
-    -   [`toHaveProperty`](#tohaveproperty)
--   [Numeric Comparisons](#numeric-comparisons)
-    -   [`toBeGreaterThan`](#tobegreaterthan)
-    -   [`toBeLessThan`](#tobelessthan)
-    -   [`toBeGreaterThanOrEqual`](#tobegreaterthanorequal)
-    -   [`toBeLessThanOrEqual`](#tobelessthanorequal)
--   [Instance Checking](#instance-checking)
-    -   [`toBeInstanceOf`](#tobeinstanceof)
--   [Error Handling](#error-handling)
-    -   [`toThrow`](#tothrow)
-    -   [`not().toThrow`](#notothrow)
--   [Combined Matchers](#combined-matchers)
-    -   [`toPassAny`](#topassany)
+- [Negation](#negation)
+  - [`not()`](#not)
+- [Equality and Identity](#equality-and-identity)
+  - [`toBe`](#tobe)
+  - [`toEqual`](#toequal)
+- [Existence and Type](#existence-and-type)
+  - [`toBeDefined`](#tobedefined)
+  - [`toBeUndefined`](#tobeundefined)
+  - [`toBeNull`](#tobenull)
+  - [`toBeNumber`](#tobenumber)
+  - [`toBeNaN`](#tobenan)
+  - [`toBeString`](#tobestring)
+  - [`toBeBoolean`](#tobeboolean)
+  - [`toBeFunction`](#tobefunction)
+  - [`toBeArray`](#tobearray)
+- [Truthiness](#truthiness)
+  - [`toBeTrue`](#tobetrue)
+  - [`toBeFalse`](#tobefalse)
+  - [`toBeTruthy`](#tobetruthy)
+  - [`toBeFalsy`](#tobefalsy)
+- [Size and Content](#size-and-content)
+  - [`toBeEmpty`](#tobeempty)
+  - [`toHaveLength`](#tohavelength)
+  - [`toContain`](#tocontain)
+  - [`toInclude`](#toinclude)
+  - [`toHaveProperty`](#tohaveproperty)
+- [Numeric Comparisons](#numeric-comparisons)
+  - [`toBeGreaterThan`](#tobegreaterthan)
+  - [`toBeLessThan`](#tobelessthan)
+  - [`toBeGreaterThanOrEqual`](#tobegreaterthanorequal)
+  - [`toBeLessThanOrEqual`](#tobelessthanorequal)
+- [Instance Checking](#instance-checking)
+  - [`toBeInstanceOf`](#tobeinstanceof)
+- [Error Handling](#error-handling)
+  - [`toThrow`](#tothrow)
+- [Combined Matchers](#combined-matchers)
+  - [`toPassAny`](#topassany)
 
 ## Equality and Identity
 
@@ -60,7 +61,7 @@ Asserts that the actual value is identical to the expected value.
 ```typescript
 expect(true).toBe(true);
 expect(1).toBe(1);
-expect('test').toBe('test');
+expect("test").toBe("test");
 ```
 
 ### `toEqual`
@@ -76,7 +77,7 @@ Asserts that the actual value is deeply equal to the expected value.
 **Examples:**
 
 ```typescript
-expect({ a: 1, b: 'test' }).toEqual({ a: 1, b: 'test' });
+expect({ a: 1, b: "test" }).toEqual({ a: 1, b: "test" });
 expect([1, 2, 3]).toEqual([1, 2, 3]);
 ```
 
@@ -89,7 +90,7 @@ Asserts that the actual value is defined.
 **Examples:**
 
 ```typescript
-expect('test').toBeDefined();
+expect("test").toBeDefined();
 expect(0).toBeDefined();
 ```
 
@@ -134,7 +135,7 @@ Asserts that the actual value is NaN.
 
 ```typescript
 expect(NaN).toBeNaN();
-expect(parseInt('invalid')).toBeNaN();
+expect(parseInt("invalid")).toBeNaN();
 ```
 
 ### `toBeString`
@@ -144,8 +145,8 @@ Asserts that the actual value is a string.
 **Examples:**
 
 ```typescript
-expect('hello').toBeString();
-expect('').toBeString();
+expect("hello").toBeString();
+expect("").toBeString();
 ```
 
 ### `toBeBoolean`
@@ -192,7 +193,7 @@ Asserts that the actual value is `true`.
 ```typescript
 expect(true).toBeTrue();
 expect(1 === 1).toBeTrue();
-expect('test').toBeTrue(); // Dont pass
+expect("test").toBeTrue(); // Dont pass
 ```
 
 ### `toBeFalse`
@@ -204,7 +205,7 @@ Asserts that the actual value is `true`.
 ```typescript
 expect(false).toBeTrue();
 expect(1 !== 1).toBeTrue();
-expect('test').toBeFalse(); // Dont pass
+expect("test").toBeFalse(); // Dont pass
 ```
 
 ### `toBeTruthy`
@@ -216,7 +217,7 @@ Asserts that the actual value is truthy.
 ```typescript
 expect(true).toBeTruthy();
 expect(1).toBeTruthy();
-expect('test').toBeTruthy();
+expect("test").toBeTruthy();
 expect({}).toBeTruthy();
 expect([1]).toBeTruthy();
 ```
@@ -230,7 +231,7 @@ Asserts that the actual value is falsy.
 ```typescript
 expect(false).toBeFalsy();
 expect(0).toBeFalsy();
-expect('').toBeFalsy();
+expect("").toBeFalsy();
 expect(null).toBeFalsy();
 expect(undefined).toBeFalsy();
 ```
@@ -245,7 +246,7 @@ Asserts that the actual value is empty (array or string).
 
 ```typescript
 expect([]).toBeEmpty();
-expect('').toBeEmpty();
+expect("").toBeEmpty();
 expect(null).toBeEmpty();
 expect(undefined).toBeEmpty();
 ```
@@ -264,7 +265,7 @@ Asserts that the actual value has the expected length.
 
 ```typescript
 expect([1, 2, 3]).toHaveLength(3);
-expect('abc').toHaveLength(3);
+expect("abc").toHaveLength(3);
 expect(null).toHaveLength(0);
 expect(undefined).toHaveLength(0);
 ```
@@ -282,8 +283,8 @@ Asserts that the actual value contains the expected substring.
 **Examples:**
 
 ```typescript
-expect('hello world').toContain('world');
-expect('test').toContain('es');
+expect("hello world").toContain("world");
+expect("test").toContain("es");
 ```
 
 ### `toInclude`
@@ -300,7 +301,7 @@ Asserts that the actual array includes the expected element.
 
 ```typescript
 expect([1, 2, 3]).toInclude(2);
-expect(['a', 'b']).toInclude('a');
+expect(["a", "b"]).toInclude("a");
 ```
 
 ### `toHaveProperty`
@@ -316,8 +317,8 @@ Asserts that the actual object has the expected property.
 **Examples:**
 
 ```typescript
-expect({ a: 1, b: 2 }).toHaveProperty('a');
-expect({ a: 1, b: 2 }).toHaveProperty('b');
+expect({ a: 1, b: 2 }).toHaveProperty("a");
+expect({ a: 1, b: 2 }).toHaveProperty("b");
 ```
 
 ## Numeric Comparisons
@@ -420,7 +421,7 @@ Asserts that the actual function throws an error.
 
 ```typescript
 expect(() => {
-    throw new Error('Test error');
+  throw new Error("Test error");
 }).toThrow();
 ```
 
@@ -428,30 +429,9 @@ You can use it with other matchers;
 
 ```typescript
 expect(() => {
-    expect(5).toBeString();
+  expect(5).toBeString();
 }).toThrow();
 ```
-
-### `not().toThrow`
-
-Asserts that the actual function does not throw an error.
-
-**Examples:**
-
-```typescript
-expect(() => {
-    return 42;
-})
-    .not()
-    .toThrow();
-expect(() => {
-    /* Empty function */
-})
-    .not()
-    .toThrow();
-```
-
-## Combined Matchers
 
 ## Combined Matchers
 
@@ -502,3 +482,41 @@ expect(5).toPassAny([
     { toBe: 5 }
 ]);
 ```
+
+## Negation
+
+### `not()`
+
+Inverts the assertion of any matcher, making it expect the opposite result.
+
+> **Important:** `not` is a function and must be called with parentheses: `not()`.
+
+**Arguments:** None
+
+**Returns:** A new `Expect` instance with inverted assertions.
+
+**Examples:**
+
+```typescript
+// Basic negation
+expect(5).not().toBe(10); // Passes because 5 is not equal to 10
+expect("hello").not().toBeString(); // Fails because "hello" is a string
+
+// Negating type checks
+expect(null).not().toBeDefined(); // Passes because null is not defined
+expect(42).not().toBeString(); // Passes because 42 is not a string
+
+// Negating comparisons
+expect(10).not().toBeGreaterThan(15); // Passes because 10 is not greater than 15
+expect([1, 2, 3]).not().toBeEmpty(); // Passes because the array is not empty
+
+// Negating truthiness
+expect(false).not().toBeTruthy(); // Passes because false is not truthy
+expect(0).not().toBeFalsy(); // Fails because 0 is falsy
+```
+
+**Common Use Cases:**
+
+- Testing that values do NOT meet certain conditions
+- Verifying negative assertions in your test logic
+- Ensuring values are NOT of certain types or states
