@@ -1,4 +1,4 @@
-![KT Testing Suite Banner](docs/img/banner_github_2.jpg)
+![KT Testing Suite Banner](docs/img/banner_testing_suite.jpg)
 
 # KT Testing Suite
 
