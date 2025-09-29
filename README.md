@@ -24,7 +24,7 @@ npm install kt-testing-suite-core
 
 Here are some examples of how to write tests using the KT Testing Suite:
 
-```javascript
+```typescript
 // src/tests/my-tests.test.ts
 import { describe, it, expect } from "kt-testing-suite-core";
 
@@ -44,11 +44,11 @@ describe("Example Test Suite", () => {
 
 For Adobe applications (After Effects, Premiere, etc.), use type helpers to avoid TypeScript errors when accessing Adobe-specific properties:
 
-```javascript
+```typescript
 import { expect, asAdobeType, isAdobeType } from "kt-testing-suite-core";
 
 // Safe type assertion
-const layer = asAdobeType < AVLayer > this.actual;
+const layer = asAdobeType<AVLayer>(this.actual);
 expect(layer.source.mainSource).toBeInstanceOf(FootageSource);
 
 // Type guard
