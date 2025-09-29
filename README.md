@@ -114,7 +114,7 @@ describe("My Tests", () => {
 });
 ```
 
-For detailed examples and advanced usage including nested hooks, see the [Core Documentation](docs/core.md).
+For detailed examples and advanced usage including nested hooks, see the [Hooks Documentation](docs/hooks.md).
 
 ## Documentation
 
@@ -122,6 +122,7 @@ For more detailed documentation, please refer to the specific README files in th
 
 - [Core](docs/core.md)
 - [Matchers](docs/matchers.md)
+- [Hooks](docs/hooks.md)
 - [Extensibility](docs/extensibility.md)
 
 ## Test Files
