@@ -14,6 +14,8 @@ import {
     createExpect,
     extendMatchers
 } from './expect';
+
+import { asAdobeType, isAdobeType } from './utils/asAdobeType';
 import { runTests } from './runner';
 
 export {
@@ -29,5 +31,7 @@ export {
     Expect,
     createExpect,
     extendMatchers,
-    runTests
+    runTests,
+    asAdobeType,
+    isAdobeType
 };
