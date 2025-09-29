@@ -1,3 +1,5 @@
+![KT Testing Suite Banner](docs/img/banner_github_2.jpg)
+
 # KT Testing Suite
 
 Welcome to the KT Testing Suite! This suite provides a comprehensive set of tools for testing ExtendScript scripts writen in TypeScript.
