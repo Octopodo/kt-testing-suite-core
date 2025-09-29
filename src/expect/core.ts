@@ -89,6 +89,10 @@ export function createExpect<T>(
         }
     }
 
+    // Añadir propiedad 'expect' para permitir acceso a otros matchers del mismo namespace
+    (expectInstance as any).expect = <U>(newActual: U): Expect<U> & Matcher<U> => 
+        createExpect(newActual, matchers);
+
     return expectInstance;
 }
 

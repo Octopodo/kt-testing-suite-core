@@ -261,4 +261,69 @@ describe('Add namespaces', () => {
             });
         });
     });
+
+    describe('Matchers accessing other matchers in same namespace', () => {
+        // Define matchers that use this.expect to access other matchers
+        const interdependentMatchers: Matcher<any> = {
+            toBeValidNumber: function () {
+                var safeActual = this.getSafeActual('number');
+                this.assert(
+                    typeof safeActual === 'number' && !isNaN(safeActual),
+                    'Expected a valid number but got ' + this.toSafeString(this.actual)
+                );
+                return this;
+            },
+            toBePositiveNumber: function () {
+                // Use this.expect to access another matcher in the same namespace
+                this.expect(this.actual).toBeValidNumber();
+                const safeActual = this.getSafeActual('number') as unknown as number;
+                this.assert(
+                    safeActual > 0,
+                    'Expected a positive number but got ' + this.toSafeString(this.actual)
+                );
+                return this;
+            },
+            toBeStrictlyPositive: function () {
+                // Chain multiple calls using this.expect
+                this.expect(this.actual).toBePositiveNumber();
+                const safeActual = this.getSafeActual('number') as unknown as number;
+                this.assert(
+                    safeActual >= 1,
+                    'Expected a strictly positive number (>= 1) but got ' + this.toSafeString(this.actual)
+                );
+                return this;
+            }
+        };
+
+        function expect<T>(actual: T): Expect<T> & Matcher<T> {
+            return extendMatchers(actual, [interdependentMatchers]);
+        }
+
+        describe('Happy Path', () => {
+            it('toBeValidNumber works independently', () => {
+                expect(5).toBeValidNumber();
+                expect(-3).toBeValidNumber();
+            });
+
+            it('toBePositiveNumber uses toBeValidNumber internally', () => {
+                expect(5).toBePositiveNumber();
+            });
+
+            it('toBeStrictlyPositive chains multiple internal calls', () => {
+                expect(5).toBeStrictlyPositive();
+            });
+
+            it('toBePositiveNumber fails for invalid number', () => {
+                expect(() => expect('not a number').toBePositiveNumber()).toThrow();
+            });
+
+            it('toBeStrictlyPositive fails for zero', () => {
+                expect(() => expect(0).toBeStrictlyPositive()).toThrow();
+            });
+
+            it('toBeStrictlyPositive fails for negative', () => {
+                expect(() => expect(-1).toBeStrictlyPositive()).toThrow();
+            });
+        });
+    });
 });
