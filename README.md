@@ -48,7 +48,7 @@ For Adobe applications (After Effects, Premiere, etc.), use type helpers to avoi
 import { expect, asAdobeType, isAdobeType } from "kt-testing-suite-core";
 
 // Safe type assertion
-const layer = asAdobeType < AVLayer > someLayer;
+const layer = asAdobeType < AVLayer > this.actual;
 expect(layer.source.mainSource).toBeInstanceOf(FootageSource);
 
 // Type guard
