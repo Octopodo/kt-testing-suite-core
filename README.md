@@ -10,7 +10,7 @@ The suite is designed with [Vitest](https://vitest.dev/) in mind, ensuring they 
 
 Also, KT Testing Suite is integrated with [KT Create Plugin](https://github.com/Octopodo/kt-plugin-template), so you can develop Adobe scripts in ExtendScript with TypeScript.
 
-All this enviroment is based on [Bolt CEP](https://github.com/hyperbrew/bolt-cep) building code, so you can use it with Bolt itself.
+All this enviroment is based on [Bolt CEP](https://github.com/hyperbrew/bolt-cep) building code, so you can use it with Bolt itself. Also it uses [Types for Adobe](https://github.com/docsforadobe/Types-for-Adobe) for Adobe Apps Typescript support.
 
 ## Installation
 
