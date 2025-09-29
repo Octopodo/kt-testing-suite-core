@@ -1,6 +1,6 @@
 {
     "name": "kt-testing-suite-core",
-    "version": "1.7.2",
+    "version": "1.7.3",
     "description": "",
     "author": "Miguel de Mendoza",
     "main": "src/index.ts",
