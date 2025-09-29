@@ -134,5 +134,8 @@ For more examples and detailed usage, please refer to the test files in the repo
 
 ## Links
 
-- [Bolt Cep](https://github.com/hyperbrew/bolt-cep)
-- [KT Extendscript Builder](https://github.com/Octopodo/kt-extendscript-builder)
+- [KT ExtendScript Builder](https://github.com/Octopodo/kt-extendscript-builder)
+- [KT Testing Suite AE](https://github.com/Octopodo/kt-testing-suite-ae)
+- [Bolt CEP](https://github.com/hyperbrew/bolt-cep)
+- [After Effects Scripting Guide](https://ae-scripting.docsforadobe.dev/)
+- [Types for Adobe](https://github.com/docsforadobe/Types-for-Adobe)
