@@ -47,6 +47,49 @@ const advancedMatchers: Matcher<any> = {
 
 In this example, the `toBeEvenAndPositive` matcher uses the `toBeEven` matcher to check if the number is even before asserting that it is also positive.
 
+### Accessing Other Matchers Within the Same Namespace
+
+When creating complex matcher suites, you may want one matcher to use another matcher from the same extended set. The KT Testing Suite provides a built-in `this.expect` property that allows matchers to access other matchers within the same namespace.
+
+```typescript
+const interdependentMatchers: Matcher<any> = {
+  toBeValidNumber: function () {
+    const safeActual = this.getSafeActual("number");
+    this.assert(
+      typeof safeActual === "number" && !isNaN(safeActual),
+      `Expected a valid number but got ${this.toSafeString(this.actual)}`
+    );
+    return this;
+  },
+  toBePositiveNumber: function () {
+    // Use this.expect to call another matcher from the same namespace
+    this.expect(this.actual).toBeValidNumber();
+
+    const safeActual = this.getSafeActual("number") as unknown as number;
+    this.assert(
+      safeActual > 0,
+      `Expected a positive number but got ${this.toSafeString(this.actual)}`
+    );
+    return this;
+  },
+};
+```
+
+### Example Usage with Namespace Access
+
+```typescript
+function expect<T>(actual: T): Expect<T> & Matcher<T> {
+  return extendMatchers(actual, [interdependentMatchers]);
+}
+
+// Matchers can now reference each other
+expect(5).toBeValidNumber(); // ✅ Passes
+expect(5).toBePositiveNumber(); // ✅ Passes (uses toBeValidNumber internally)
+expect(-1).toBePositiveNumber(); // ❌ Fails
+```
+
+### Extending the `expect` Function
+
 ### Example Usage
 
 Here is how you can use the new matcher:
