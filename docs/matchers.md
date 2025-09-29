@@ -4,8 +4,6 @@ Here you can find a reference to all existing matchers.
 
 ## Index
 
-- [Negation](#negation)
-  - [`not()`](#not)
 - [Equality and Identity](#equality-and-identity)
   - [`toBe`](#tobe)
   - [`toEqual`](#toequal)
@@ -41,6 +39,8 @@ Here you can find a reference to all existing matchers.
   - [`toThrow`](#tothrow)
 - [Combined Matchers](#combined-matchers)
   - [`toPassAny`](#topassany)
+- [Negation](#negation)
+  - [`not()`](#not)
 
 ## Equality and Identity
 
