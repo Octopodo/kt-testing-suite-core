@@ -12,7 +12,8 @@ import {
     type Matcher,
     Expect,
     createExpect,
-    extendMatchers
+    extendMatchers,
+    throwError
 } from './expect';
 
 import { asAdobeType, isAdobeType } from './utils/asAdobeType';
@@ -31,6 +32,7 @@ export {
     Expect,
     createExpect,
     extendMatchers,
+    throwError,
     runTests,
     asAdobeType,
     isAdobeType

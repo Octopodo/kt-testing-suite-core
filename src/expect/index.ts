@@ -2,7 +2,7 @@ import { createExpect, extendMatchers, type Matcher, Expect } from './core';
 import { jsMatchers } from './matchers/js';
 import { IOMatchers } from './matchers/io';
 import { describe, it, beforeEach, afterEach, getSuites , beforeAll, afterAll} from '../describe';
-import {expect} from './expect-base';
+import {expect, throwError} from './expect-base';
 
 export {
     describe,
@@ -17,4 +17,5 @@ export {
     createExpect,
     extendMatchers,
     expect,
+    throwError
 };
