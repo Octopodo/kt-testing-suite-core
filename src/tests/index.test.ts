@@ -7,4 +7,5 @@ import './toPassAny.test';
 import './extend.test';
 import './beforeAfterEach.test';
 import './beforeAfterAll.test';
+import './throwError.test';
 runTests();
