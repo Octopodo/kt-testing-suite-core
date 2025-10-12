@@ -479,6 +479,6 @@ export const jsMatchers: Matcher<any> = {
         }
         throw new Error(`Failed all conditions:\n  - ${errors.join('\n  - ')}`);
     },
-
+    
     // TODO toMatchObject, toPassAll
 };
