@@ -22,4 +22,12 @@ describe('throwError Utility', () => {
         const longMessage = 'This is a very long error message that should test how the runner handles lengthy output in the failure report.';
         expect(() => throwError(longMessage)).toThrow();
     });
+    it('should not run subsequent expects after throwError', () => {
+        expect(() => {
+            throwError('This error should stop further execution');
+            // This line should not be reached
+            $.writeln('This line should not execute');
+            expect(true).toBe(false);
+        }).toThrow('This error should stop further execution');
+    });
 });
