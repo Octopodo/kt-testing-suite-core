@@ -135,7 +135,13 @@ expectInstance.toBe(5);
 
 ### TestRunner
 
-Class for running test suites and displaying results.
+Class for running test suites and displaying results. You can customize the output using a [Reporter](reporters.md).
+
+**Constructor:**
+`new TestRunner(reporter?: TestReporter, filter?: string)`
+
+- `reporter`: Optional. Defaults to `ConsoleReporter`.
+- `filter`: Optional. A case-insensitive string. Only tests whose full name (including suite descriptions) contains this string will be executed.
 
 **Properties:**
 
@@ -149,12 +155,11 @@ Class for running test suites and displaying results.
 | Method                       | Description                    |
 | ---------------------------- | ------------------------------ |
 | `run(suites: Suite[]): void` | Runs the provided test suites. |
-| `showResults(): void`        | Displays the test results.     |
 
 **Example:**
 
 ```typescript
-const runner = new TestRunner();
+const runner = new TestRunner(); // Uses ConsoleReporter by default
 runner.run(getSuites());
 ```
 
@@ -164,14 +169,25 @@ Runs all defined test suites.
 
 **Arguments:**
 
-| Argument | Type    | Description                      |
-| -------- | ------- | -------------------------------- |
-| `suites` | Suite[] | The array of test suites to run. |
+| Argument   | Type           | Description                                                                                                |
+| ---------- | -------------- | ---------------------------------------------------------------------------------------------------------- |
+| `suites`   | Suite[]        | The array of test suites to run.                                                                           |
+| `reporter` | `TestReporter` | (Optional) The reporter to use. Defaults to `ConsoleReporter`.                                             |
+| `filter`   | `string`       | (Optional) A string to filter tests. Only tests/suites containing this string (case-insensitive) will run. |
 
 **Example:**
 
 ```typescript
+import { runTests, JSONReporter } from "kt-testing-suite-core";
+
+// Default
 runTests();
+
+// With Custom Reporter
+runTests(undefined, new JSONReporter());
+
+// With Filter (run only tests containing "auth")
+runTests(undefined, undefined, "auth");
 ```
 
 ### Expected Output Example

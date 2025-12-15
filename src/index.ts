@@ -17,7 +17,10 @@ import {
 } from './expect';
 
 import { asAdobeType, isAdobeType } from './utils/asAdobeType';
-import { runTests } from './runner';
+import { runTests, TestRunner } from './runner';
+import { ConsoleReporter } from './reporters/ConsoleReporter';
+import { JSONReporter } from './reporters/JSONReporter';
+import type { TestReporter } from './reporters/types';
 
 export {
     describe,
@@ -34,6 +37,10 @@ export {
     extendMatchers,
     throwError,
     runTests,
+    TestRunner,
     asAdobeType,
-    isAdobeType
+    isAdobeType,
+    ConsoleReporter,
+    JSONReporter,
+    type TestReporter
 };
