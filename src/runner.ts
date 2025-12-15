@@ -1,10 +1,17 @@
 import { Suite } from './types';
 import { getSuites } from './describe';
 
+/**
+ * Class responsible for executing test suites and tracking results.
+ */
 export class TestRunner {
     private passedTests = 0;
     private failedTests = 0;
 
+    /**
+     * Executes the provided test suites.
+     * @param suites - An array of test suites to run.
+     */
     run(suites: Suite[]): void {
         for (const suite of suites) {
             this.runSuite(suite);
@@ -107,6 +114,11 @@ export class TestRunner {
     }
 }
 
+/**
+ * Runs all registered test suites.
+ * Defaults to running suites retrieved from `getSuites()`.
+ * @param suites - Optional array of suites to run.
+ */
 export function runTests(suites = getSuites()): void {
     const runner = new TestRunner();
     runner.run(suites);

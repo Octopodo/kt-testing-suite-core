@@ -186,7 +186,7 @@ A type assertion helper that safely converts `any` values to specific Adobe type
 **Example:**
 
 ```typescript
-import { asAdobeType } from "kt-testing-suite-core/src/utils/type-helpers";
+import { asAdobeType } from "kt-testing-suite-core/src/utils/asAdobeType";
 
 const customMatchers: Matcher<any> = {
   toBeFootageLayer: function () {
@@ -226,7 +226,7 @@ A type guard function that checks if a value is an instance of a specific Adobe 
 import {
   isAdobeType,
   asAdobeType,
-} from "kt-testing-suite-core/src/utils/type-helpers";
+} from "kt-testing-suite-core/src/utils/asAdobeType";
 
 const customMatchers: Matcher<any> = {
   toBeValidLayer: function () {
@@ -269,7 +269,7 @@ import { Matcher } from "kt-testing-suite-core/src/expect/core";
 import {
   asAdobeType,
   isAdobeType,
-} from "kt-testing-suite-core/src/utils/type-helpers";
+} from "kt-testing-suite-core/src/utils/asAdobeType";
 
 export const adobeMatchers: Matcher<any> = {
   toBeFootageLayer: function () {

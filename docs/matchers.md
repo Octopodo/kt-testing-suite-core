@@ -37,6 +37,11 @@ Here you can find a reference to all existing matchers.
   - [`toBeInstanceOf`](#tobeinstanceof)
 - [Error Handling](#error-handling)
   - [`toThrow`](#tothrow)
+- [IO Matchers](#io-matchers)
+  - [`toBeFile`](#tobefile)
+  - [`toBeFolder`](#tobefolder)
+  - [`toBeFileOrFolder`](#tobefileorfolder)
+  - [`fileExists`](#fileexists)
 - [Combined Matchers](#combined-matchers)
   - [`toPassAny`](#topassany)
 - [Negation](#negation)
@@ -431,6 +436,52 @@ You can use it with other matchers;
 expect(() => {
   expect(5).toBeString();
 }).toThrow();
+```
+
+## IO Matchers
+
+### `toBeFile`
+
+Asserts that the actual value is an instance of `File`.
+
+**Examples:**
+
+```typescript
+var file = new File("test.txt");
+expect(file).toBeFile();
+```
+
+### `toBeFolder`
+
+Asserts that the actual value is an instance of `Folder`.
+
+**Examples:**
+
+```typescript
+var folder = new Folder("test");
+expect(folder).toBeFolder();
+```
+
+### `toBeFileOrFolder`
+
+Asserts that the actual value is either an instance of `File` or `Folder`.
+
+**Examples:**
+
+```typescript
+expect(new File("test.txt")).toBeFileOrFolder();
+expect(new Folder("test")).toBeFileOrFolder();
+```
+
+### `fileExists`
+
+Asserts that the actual value is a `File` object and that it exists on the filesystem.
+
+**Examples:**
+
+```typescript
+var file = new File("existing.txt");
+expect(file).fileExists();
 ```
 
 ## Combined Matchers
