@@ -169,3 +169,5 @@ export function runTests(suites = getSuites(), reporter?: TestReporter, filter?:
     const runner = new TestRunner(reporter, filter);
     runner.run(suites);
 }
+
+
