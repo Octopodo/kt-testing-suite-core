@@ -11,3 +11,4 @@ import './throwError.test';
 import './jsonReporter.test';
 import './filtering.test';
 runTests();
+
