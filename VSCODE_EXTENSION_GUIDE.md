@@ -43,9 +43,24 @@ VS Code needs to show the list of tests _before_ running them.
 
 ## Phase 3: The Runtime Bridge
 
-1.  **Command Execution**: The extension needs to know _how_ to run your tests. This usually means executing a command like `npm run test:json`.
-2.  **JSON Parsing**: The extension consumes the output from the `JSONReporter` newly implemented in the core.
-3.  **Result Mapping**: Map the JSON status (`passed`, `failed`) and location info back to the `TestItem` in VS Code.
+1.  **Command Execution**: The extension needs to know _how_ to run your tests.
+2.  **Wrapper Logic (Manual Global Strategy)**:
+    - Since the library **no longer exposes globals automtically** (to avoid pollution), the Extension Wrapper has two choices:
+      - **A) Parse stdout**: Just run the user script and parse the console output (simplest, no globals needed).
+      - **B) Double Run (Robust JSON)**: Include the script, then run it again with `JSONReporter`.
+
+        - _Requirement_: The user's script must manually expose `runTests` to `$.global` OR the wrapper must try to find it.
+        - _Snippet_:
+
+        ```javascript
+        // #include "path/to/user/test.js"
+
+        // IF the user exposed it:
+        if (typeof runTests !== "undefined") {
+          runTests(undefined, new JSONReporter("path/to/results.json"));
+        }
+        ```
+3.  **JSON Parsing**: The extension consumes the output.
 
 ## Phase 4: Interactive Debugging (Advanced)
 

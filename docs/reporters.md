@@ -60,8 +60,11 @@ You can pass a reporter instance to the `runTests` function.
 ```typescript
 import { runTests, JSONReporter } from "kt-testing-suite-core";
 
-// Run with JSON output
+// Run with JSON output to console
 runTests(undefined, new JSONReporter());
+
+// Run with JSON output to file (recommended for IDE integration)
+runTests(undefined, new JSONReporter("/path/to/results.json"));
 ```
 
 If you want to use the default `ConsoleReporter` but explicitely:
