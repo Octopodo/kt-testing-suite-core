@@ -31,6 +31,7 @@ Here you can find a reference to all existing matchers.
 - [Numeric Comparisons](#numeric-comparisons)
   - [`toBeGreaterThan`](#tobegreaterthan)
   - [`toBeLessThan`](#tobelessthan)
+  - [`toBeCloseTo`](#tobecloseto)
   - [`toBeGreaterThanOrEqual`](#tobegreaterthanorequal)
   - [`toBeLessThanOrEqual`](#tobelessthanorequal)
 - [Instance Checking](#instance-checking)
@@ -360,6 +361,24 @@ Asserts that the actual value is less than the expected value.
 ```typescript
 expect(3).toBeLessThan(5);
 expect(-1).toBeLessThan(0);
+```
+
+### `toBeCloseTo`
+
+Asserts that the actual value is close to the expected value, within a specified precision. This is useful for floating-point comparisons.
+
+**Arguments:**
+
+| Parameter   | Description                                                                                                        |
+| ----------- | ------------------------------------------------------------------------------------------------------------------ |
+| `expected`  | The value to compare against.                                                                                      |
+| `precision` | (Optional) The number of decimal places to check. Defaults to 6. Formula: `abs(actual - expected) < 10^-precision` |
+
+**Examples:**
+
+```typescript
+expect(0.1 + 0.2).toBeCloseTo(0.3);
+expect(3.14159).toBeCloseTo(3.14, 2);
 ```
 
 ### `toBeGreaterThanOrEqual`

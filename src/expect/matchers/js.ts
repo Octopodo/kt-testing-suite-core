@@ -61,6 +61,7 @@ export const jsMatchers: Matcher<any> = {
         return this;
     },
 
+
     toBeFalse: function () {
         var safeActual: any = this.getSafeActual('any');
         this.assert(
@@ -169,6 +170,20 @@ export const jsMatchers: Matcher<any> = {
         return this;
     },
 
+    toBeCloseTo: function (expected: number, precision?: number) {
+        var safeActual: any = this.getSafeActual('number');
+        precision = precision || 6;
+        this.assert(
+            Math.abs(safeActual - expected) < Math.pow(10, -precision),
+            'Expected ' +
+                this.toSafeString(this.actual) +
+                ' to be close to ' +
+                expected +
+                ' but got ' +
+                safeActual
+        );
+        return this;
+    },
     toBeNaN: function () {
         var safeActual: any = this.getSafeActual('number');
         this.assert(
